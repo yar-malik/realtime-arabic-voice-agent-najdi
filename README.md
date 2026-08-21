@@ -30,18 +30,31 @@ Audio comes back while the sentence is still being written. The number that
 matters is `first_audio_ms` — the gap the caller actually experiences, printed
 on every run.
 
-## What speaks, and what listens
+## Two ways to run this
 
-Voho is a speech **synthesis** API. It speaks; it does not transcribe. So the
-listening end is yours to choose — this repository starts from text, and any
-recogniser that hands you a string will drop straight in.
+**Let Voho be the whole agent.** A Voho voice agent answers the line, hears the
+caller in Saudi Arabic, works out what they actually want, takes the action in
+your systems, stops talking the moment it is interrupted, hands over to a
+person when it should, and leaves a bilingual transcript and summary behind.
+Hearing, deciding and speaking are all Voho's — you configure the agent and its
+actions rather than writing any of this. It is the fastest route to a live
+line.
 
-| Part | What does it | Where |
+**Or assemble it yourself, the way this repository does.** Here the
+conversation lives in code you can read line by line, the tools are yours, and
+Voho's Speech API provides the voice. Worth it when the script has to be
+reviewed before it goes anywhere near a caller, or when every part has to sit
+inside your own network.
+
+| Part | In this repository | With a Voho agent |
 | --- | --- | --- |
-| Speaking | **Voho** over `wss://app.voho.ai/v1/speech/ws`, pipelined | [`voho_ws.py`](voho_ws.py) |
-| Retrieval | BM25 over your `.md` files — no vector database, no model download | [`rag.py`](rag.py) |
-| Tools | Lookups the model calls mid-sentence | [`tools.py`](tools.py) |
-| The answer | Any OpenAI-compatible endpoint, or none at all | [`agent.py`](agent.py) |
+| Hearing the caller | whichever recogniser hands you the text this starts from | Voho |
+| Deciding what to do | retrieval plus a model of your choosing | Voho |
+| Acting in your systems | [`tools.py`](tools.py), called mid-sentence | Voho actions, calling your API |
+| Speaking | Voho, via [`voho.py`](voho.py) | Voho |
+| Transcript and summary | yours to keep | Voho, in Arabic and English |
+
+Both end in the same place. Start with whichever suits the team you have.
 
 ## Quick start
 
