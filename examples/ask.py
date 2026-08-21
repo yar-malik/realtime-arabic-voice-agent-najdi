@@ -22,7 +22,7 @@ load_dotenv()
 
 import agent  # noqa: E402
 import rag  # noqa: E402
-from voho_ws import VohoError  # noqa: E402
+from voho_ws import VohoError, has_key  # noqa: E402
 
 OUT = Path("out")
 
@@ -58,6 +58,14 @@ async def ask(question: str, index: rag.Index, *, speak: bool, n: int) -> None:
 async def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     speak = "--no-audio" not in sys.argv
+
+    if speak and not has_key():
+        print(
+            "\n  \033[33mNo Voho key yet.\033[0m Hearing the answer start before it is"
+            "\n  \033[2mfinished is the point — run\033[0m python setup.py \033[2m(a minute, at"
+            "\n  app.voho.ai), or pass\033[0m --no-audio \033[2mto run retrieval only.\033[0m\n"
+        )
+        raise SystemExit(1)
 
     index = rag.load()
     print(f"\033[2m  {len(index.passages)} passages indexed from {rag.KNOWLEDGE_DIR}/\033[0m")

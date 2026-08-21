@@ -36,6 +36,18 @@ class VohoError(RuntimeError):
     pass
 
 
+MISSING_KEY = """No Voho API key.
+
+  Run:  python setup.py
+
+It walks you through creating one at https://app.voho.ai (API Tokens),
+checks it against the live voice catalogue, and writes it to .env."""
+
+
+def has_key() -> bool:
+    return bool(API_KEY) and not API_KEY.startswith("voho_sk_live_xxx")
+
+
 class SpeechSession:
     """One utterance, streamed.
 
@@ -60,11 +72,8 @@ class SpeechSession:
         model: str = DEFAULT_MODEL,
         fmt: str = "opus",
     ) -> None:
-        if not API_KEY:
-            raise VohoError(
-                "VOHO_API_KEY is not set. Create a token at https://app.voho.ai "
-                "under API Tokens and put it in .env"
-            )
+        if not has_key():
+            raise VohoError(MISSING_KEY)
         self.voice = voice
         self.model = model
         self.fmt = fmt
