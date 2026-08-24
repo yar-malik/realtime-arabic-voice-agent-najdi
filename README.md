@@ -21,7 +21,7 @@ the document and section every answer came from.
 
 You do not have to clone anything to see whether this works for you. The same
 engine this repository calls is running at **[app.voho.ai/agents](https://app.voho.ai/agents)** —
-Build an agent and talk to it out loud, in the browser, in about a minute.
+build an agent and talk to it out loud, in the browser, in about a minute.
 
 New accounts start with **$25 of credit**, and one balance and one API key
 cover every Voho product: AI Call Center, and the five beside it.
