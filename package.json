@@ -1,0 +1,12 @@
+{
+  "name": "realtime-arabic-voice-agent-najdi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A real-time Arabic voice agent that answers from your own documents and starts speaking before the sentence is finished. Streaming speech over the Voho WebSocket API, with BM25 retrieval built for Arabic.",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node examples/node/index.mjs"
+  },
+  "license": "MIT"
+}
